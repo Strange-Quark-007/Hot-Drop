@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Text Share</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap"
@@ -21,30 +21,7 @@
     <button type="button" class="button courier-prime-regular" onclick="handleCopy()">Copy Text</button>
   </div>
   <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-    socket.on('textChange', (text) => {
-      const textArea = document.getElementById('textArea');
-      textArea.value = text.data;
-    });
-
-    function handleTextChange() {
-      const textArea = document.getElementById('textArea');
-      const text = textArea.value;
-      socket.emit('textChange', text);
-    }
-
-    function handleCopy() {
-      const textArea = document.getElementById('textArea');
-      const cursorStart = textArea.selectionStart;
-      const cursorEnd = textArea.selectionEnd;
-      textArea.select();
-      textArea.setSelectionRange(0, 99999);
-      document.execCommand('copy');
-      textArea.setSelectionRange(cursorStart, cursorEnd);
-      textArea.focus();
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
