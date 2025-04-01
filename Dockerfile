@@ -4,8 +4,8 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Copy package files and install dependencies before copying the rest of the code
-COPY package*.json ./
-RUN npm ci
+COPY package.json ./
+RUN npm i
 
 # Copy the rest of the application code
 COPY . .
@@ -17,17 +17,15 @@ RUN npm run build
 RUN npm prune --omit=dev
 
 # Stage 2: Run
-FROM node:18-alpine as runtime
+FROM node:18-alpine AS runtime
 
 WORKDIR /app
 
 # Copy only necessary files from the builder stage
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/package*.json ./
-
-# Install production dependencies
-RUN npm ci --omit=dev --ignore-scripts
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
 
 # Set NODE_ENV for optimized performance
 ENV NODE_ENV=production
