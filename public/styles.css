@@ -9,15 +9,25 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
+  padding: 16px;
   background-color: #1e1e2f;
   color: #e0e0e0;
   font-family: 'Roboto', Arial, sans-serif;
 }
 
-.container {
-  display: flex;
-  height: 90%;
+/* For minimal thin scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(200, 200, 255, 0.4);
+  border-radius: 9999px;
 }
 
 .textArea {
@@ -30,14 +40,8 @@ body {
   border-radius: 12px;
   color: #e0e0e0;
   background-color: #2b2b3f;
-  font-size: 20px;
+  font-size: 14px;
   resize: none;
-}
-
-.courier-prime-regular {
-  font-family: 'Courier Prime', monospace;
-  font-weight: 300;
-  font-style: normal;
 }
 
 textarea:focus {
@@ -62,4 +66,157 @@ textarea:focus {
 
 button:hover {
   background-color: #506070;
+}
+
+.courier-prime-regular {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.main-container {
+  display: flex;
+  gap: 20px;
+  height: calc(100vh - 40px);
+}
+
+.text-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 75%;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 25%;
+  height: 100%;
+  min-height: 0;
+}
+
+.file-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #2b2b3f;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  height: 100%;
+  min-height: 0; /* This allows the file-list to scroll properly */
+  overflow-y: auto;
+}
+
+.file-upload-label {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.file-header {
+  padding: 20px;
+  text-align: center;
+  background-color: #1e1e2f;
+  border: 2px dotted #3d3d5c;
+  color: #bfbfff;
+  font-size: 16px;
+  margin: 12px;
+  border-radius: 8px;
+}
+
+.file-list {
+  padding: 12px;
+}
+
+.button {
+  align-self: flex-start;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  color: #bfbfff;
+  background-color: #405060;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #506070;
+}
+
+.file-button {
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: transparent;
+  border: 1px solid #bfbfff;
+  color: #bfbfff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.file-button:hover {
+  background-color: #bfbfff;
+  color: #2b2b3f;
+}
+
+.file-button.delete {
+  border-color: #ff7f7f;
+  color: #ff7f7f;
+}
+
+.file-button.delete:hover {
+  background-color: #ff7f7f;
+  color: #2b2b3f;
+}
+
+.file-section.drag-over {
+  background-color: #252538;
+}
+
+.file-section.drag-over .file-header {
+  border-color: #bfbfff;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-row {
+  display: flex;
+  white-space: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.file-row span {
+  width: 50%;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .text-section,
+  .right-section {
+    flex: 1;
+    width: 100%;
+  }
+
+  .file-section {
+    flex: 1;
+    overflow-y: auto;
+  }
 }

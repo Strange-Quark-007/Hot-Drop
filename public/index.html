@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text Share</title>
+  <title>Hot Drop</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,13 +13,29 @@
 </head>
 
 <body>
-  <div class="container">
-    <textarea id="textArea" class="textArea courier-prime-regular" oninput="handleTextChange()"
-      placeholder="Enter your text..."></textarea>
+  <div class="main-container">
+
+    <div class="text-section">
+      <textarea id="textArea" class="textArea courier-prime-regular" oninput="handleTextChange()"
+        placeholder="Enter your text..."></textarea>
+      <button type="button" class="button courier-prime-regular" onclick="handleCopy()">Copy</button>
+    </div>
+
+    <div class="right-section">
+      <div class="file-section">
+        <label class="file-upload-label">
+          <input type="file" id="fileInput" multiple class="file-input" onchange="handleUpload(event)">
+          <div class="file-header courier-prime-regular">
+            Drop files here or click to upload
+          </div>
+          <div class="file-list" id="fileList">
+          </div>
+        </label>
+      </div>
+      <button type="button" class="button courier-prime-regular" onclick="handleDownloadAll()">Download All</button>
+    </div>
   </div>
-  <div>
-    <button type="button" class="button courier-prime-regular" onclick="handleCopy()">Copy Text</button>
-  </div>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="script.js"></script>
 </body>

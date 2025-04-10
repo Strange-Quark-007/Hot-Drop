@@ -1,6 +1,6 @@
 {
-  "name": "text-share",
-  "version": "1.0.0",
+  "name": "hot-drop",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
