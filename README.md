@@ -11,6 +11,16 @@ Simple, fast, and intuitive — it connects your devices effortlessly.
 - **Real-Time Sync**: Automatically keeps all connected clients updated with zero lag.
 - **Docker Ready**: Deploy and run it easily with the included Dockerfile.
 
+## Preview
+
+- Desktop
+
+  ![Desktop](https://github.com/user-attachments/assets/adb920ad-e0bb-4284-b8e6-501ca70c3d87)
+
+- Mobile
+
+  ![Mobile](https://github.com/user-attachments/assets/a2e4e350-84da-4e65-b000-923830446120)
+
 ## LICENSE
 
 This project is licensed under the [**MIT License**](LICENSE).
