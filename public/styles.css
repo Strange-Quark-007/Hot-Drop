@@ -9,15 +9,25 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
+  padding: 16px;
   background-color: #1e1e2f;
   color: #e0e0e0;
   font-family: 'Roboto', Arial, sans-serif;
 }
 
-.container {
-  display: flex;
-  height: 90%;
+/* For minimal thin scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(200, 200, 255, 0.4);
+  border-radius: 9999px;
 }
 
 .textArea {
@@ -30,14 +40,8 @@ body {
   border-radius: 12px;
   color: #e0e0e0;
   background-color: #2b2b3f;
-  font-size: 20px;
+  font-size: 14px;
   resize: none;
-}
-
-.courier-prime-regular {
-  font-family: 'Courier Prime', monospace;
-  font-weight: 300;
-  font-style: normal;
 }
 
 textarea:focus {
@@ -74,7 +78,6 @@ button:hover {
   display: flex;
   gap: 20px;
   height: calc(100vh - 40px);
-  min-width: max-content;
 }
 
 .text-section {
@@ -84,23 +87,13 @@ button:hover {
   width: 75%;
 }
 
-.textArea {
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-  border: none;
-  border-radius: 12px;
-  color: #e0e0e0;
-  background-color: #2b2b3f;
-  font-size: 20px;
-  resize: none;
-}
-
 .right-section {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 25%;
   height: 100%;
+  min-height: 0;
 }
 
 .file-section {
@@ -110,8 +103,9 @@ button:hover {
   background-color: #2b2b3f;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-  flex: 1;
+  height: 100%;
   min-height: 0; /* This allows the file-list to scroll properly */
+  overflow-y: auto;
 }
 
 .file-upload-label {
@@ -132,9 +126,7 @@ button:hover {
 }
 
 .file-list {
-  overflow-y: auto;
   padding: 12px;
-  flex: 1;
 }
 
 .button {
@@ -188,4 +180,43 @@ button:hover {
 
 .file-input {
   display: none;
+}
+
+.file-row {
+  display: flex;
+  white-space: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.file-row span {
+  width: 50%;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .text-section,
+  .right-section {
+    flex: 1;
+    width: 100%;
+  }
+
+  .file-section {
+    flex: 1;
+    overflow-y: auto;
+  }
 }
