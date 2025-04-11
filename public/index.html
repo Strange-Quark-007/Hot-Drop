@@ -21,7 +21,7 @@
       <button type="button" class="button courier-prime-regular" onclick="handleCopy()">Copy</button>
     </div>
 
-    <div class="right-section">
+    <div class="right-section" ondrop="handleDrop(event)" ondragover="event.preventDefault()">
       <div class="file-section">
         <label class="file-upload-label">
           <input type="file" id="fileInput" multiple class="file-input" onchange="handleUpload(event)">

@@ -4,6 +4,9 @@ const fileInput = document.getElementById('fileInput');
 const fileList = document.getElementById('fileList');
 let files = [];
 
+window.addEventListener('dragover', (e) => e.preventDefault());
+window.addEventListener('drop', (e) => e.preventDefault());
+
 socket.on('textChange', (text) => {
   const textArea = document.getElementById('textArea');
   textArea.value = text.data;
@@ -29,6 +32,15 @@ function handleCopy() {
   document.execCommand('copy');
   textArea.setSelectionRange(cursorStart, cursorEnd);
   textArea.focus();
+}
+
+async function handleDrop(e) {
+  e.preventDefault();
+  const selected = Array.from(e.dataTransfer.files);
+  for (const file of selected) {
+    const buffer = await file.arrayBuffer();
+    socket.emit('uploadFile', { name: file.name }, new Uint8Array(buffer));
+  }
 }
 
 async function handleUpload(e) {
