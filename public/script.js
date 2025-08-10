@@ -4,6 +4,9 @@ const fileInput = document.getElementById('fileInput');
 const fileList = document.getElementById('fileList');
 let files = [];
 
+// Add paste event listener for automatic image uploads
+document.addEventListener('paste', handlePaste);
+
 window.addEventListener('dragover', (e) => e.preventDefault());
 window.addEventListener('drop', (e) => e.preventDefault());
 
@@ -51,6 +54,25 @@ async function handleUpload(e) {
   }
 }
 
+async function handlePaste(e) {
+  const items = e.clipboardData?.items;
+  if (!items) return;
+
+  for (let item of items) {
+    if (item.type.indexOf('image') !== -1) {
+      const file = item.getAsFile();
+      if (file) {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const extension = file.name.split('.').pop() || 'png';
+        const fileName = `image-${timestamp}.${extension}`;
+
+        const buffer = await file.arrayBuffer();
+        socket.emit('uploadFile', { name: fileName }, new Uint8Array(buffer));
+      }
+    }
+  }
+}
+
 function downloadFile(url, fileName) {
   const encodedFileName = encodeURIComponent(fileName);
   const downloadUrl = `${url}?filename=${encodedFileName}`;
@@ -75,7 +97,7 @@ function renderFileList() {
     fileRow.className = 'file-row courier-prime-regular';
 
     fileRow.innerHTML = `
-      <span>${file.name}</span>
+      <a href="${file.url}" target="_blank" class="file-name"><span>${file.name}</span></a>
       <div class="actions">
         <button class="file-button" onclick="downloadFile('${file.url}', '${file.name}')">
           Download

@@ -190,8 +190,9 @@ button:hover {
   margin-bottom: 8px;
 }
 
-.file-row span {
+.file-row a {
   width: 50%;
+  color: #bfbfff;
   text-wrap: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
